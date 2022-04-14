@@ -13,6 +13,7 @@ namespace UIRS
     public partial class MainWindow : Form
     {
         private Calculate simulation;
+        private int iteration = 0;
         private bool ReadValues(Calculate a)
         {
             bool init = true;
@@ -79,19 +80,31 @@ namespace UIRS
             InitializeComponent();
             simulation = new Calculate();
         }
-
+        public void ChartIteration() 
+        {
+            fish_chart.Series[0].Points.AddXY(0, simulation.fish_stock);
+            capital_chart.Series[0].Points.AddXY(0, simulation.capital);
+            personalcapital_chart.Series[0].Points.AddXY(0, simulation.personal_capital);
+            earn_chart.Series[0].Points.AddXY(0, simulation.prod);
+            iteration++;
+        }
         private void IterationButtonClick(object sender, EventArgs e)
         {
             if (ReadValues(simulation))
             {
                 simulation.Iteration();
-                calculation_label.Text = $"Доход: {simulation.income}\n" +
-                    $"Расход: {simulation.expenses}\n" +
-                    $"Запас рыбы: {simulation.fish_stock}\n" +
-                    $"Добыча: {simulation.prod}\n" +
+                var eps = 1000;
+                calculation_label.Text = $"Шаг - {iteration + 1}\n" +
+                    $"Доход: {Math.Floor(simulation.income*eps)/eps}\n" +
+                    $"Расход: {Math.Floor(simulation.expenses*eps)/eps}\n" +
+                    $"Запас рыбы: {Math.Floor(simulation.fish_stock*eps)/eps}\n" +
+                    $"Добыча: {Math.Floor(simulation.prod*eps)/eps}\n" +
                     $"Судна: {simulation.ships.Count}\n" +
-                    $"Капитал: {simulation.capital}\n" +
-                    $"Личный капитал: {simulation.personal_capital}\n";
+                    $"Капитал: {Math.Floor(simulation.capital*eps)/eps}\n" +
+                    $"Личный капитал: {Math.Floor(simulation.personal_capital*eps)/eps}\n" +
+                    $"Персонал: {simulation.personal}\n" +
+                    $"Инвестиционный вклад: {Math.Floor(simulation.investition*eps)/eps}";
+                ChartIteration();  
             }
         }
     }

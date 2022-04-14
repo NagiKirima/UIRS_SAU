@@ -34,14 +34,14 @@ namespace UIRS
             fish_koeff = 1.05;
             invest_koeff = 0.1;
             ship_life = 20;
-            ship_cost = 1500;
+            ship_cost = 1000;
             salary = 10;
             ship_command = 15;
             ship_earn = 20;
             fish_cost = 35;
             capital = 1000;
             personal_capital = 0;
-            fish_stock = 1000;
+            fish_stock = 10000;
             ships.Add(ship_life);
         }
         //calculate methods
@@ -62,7 +62,7 @@ namespace UIRS
         private void ExpensesCalculate() 
         {
             personal = ship_command * ships.Count;
-            expenses = personal * salary;
+            expenses = personal * salary + ship_cost / ship_life * ships.Count;
         }
         private void FishStockCalculate() 
         {
@@ -85,12 +85,15 @@ namespace UIRS
             var benefit = income - expenses;
             if (benefit > 0)
             {
-                personal_capital += benefit * (1 - invest_koeff);
-                investition += benefit * invest_koeff;
-                capital += benefit - benefit * invest_koeff - benefit * (1 - invest_koeff);
+                var p_salary = benefit * (1 - invest_koeff);
+                var investsum = benefit * invest_koeff;
+                personal_capital += p_salary;
+                investition += investsum;
+                capital = capital + benefit - investsum - p_salary;
             }
+            else capital += benefit;
         }
-        private void ShipsCalculate() 
+        private void ShipsCalculate()   
         {
             if (investition > ship_cost)
             {
