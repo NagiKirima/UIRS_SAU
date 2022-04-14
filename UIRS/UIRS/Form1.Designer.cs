@@ -29,14 +29,14 @@ namespace UIRS
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea25 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea26 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea27 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea28 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.iteration_button = new System.Windows.Forms.Button();
             this.fish_koeff = new System.Windows.Forms.TextBox();
             this.invest_koeff = new System.Windows.Forms.TextBox();
@@ -63,6 +63,8 @@ namespace UIRS
             this.label10 = new System.Windows.Forms.Label();
             this.earn_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.personal_capital_textbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.fish_chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.capital_chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalcapital_chart)).BeginInit();
@@ -71,7 +73,7 @@ namespace UIRS
             // 
             // iteration_button
             // 
-            this.iteration_button.Location = new System.Drawing.Point(34, 680);
+            this.iteration_button.Location = new System.Drawing.Point(34, 693);
             this.iteration_button.Name = "iteration_button";
             this.iteration_button.Size = new System.Drawing.Size(1220, 69);
             this.iteration_button.TabIndex = 0;
@@ -220,43 +222,43 @@ namespace UIRS
             // 
             // fish_chart
             // 
-            chartArea25.Name = "ChartArea1";
-            this.fish_chart.ChartAreas.Add(chartArea25);
+            chartArea1.Name = "ChartArea1";
+            this.fish_chart.ChartAreas.Add(chartArea1);
             this.fish_chart.Location = new System.Drawing.Point(441, 53);
             this.fish_chart.Name = "fish_chart";
-            series25.ChartArea = "ChartArea1";
-            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series25.Legend = "Legend1";
-            series25.Name = "Series1";
-            this.fish_chart.Series.Add(series25);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.fish_chart.Series.Add(series1);
             this.fish_chart.Size = new System.Drawing.Size(378, 265);
             this.fish_chart.TabIndex = 18;
             this.fish_chart.Text = "chart1";
             // 
             // capital_chart
             // 
-            chartArea26.Name = "ChartArea1";
-            this.capital_chart.ChartAreas.Add(chartArea26);
+            chartArea2.Name = "ChartArea1";
+            this.capital_chart.ChartAreas.Add(chartArea2);
             this.capital_chart.Location = new System.Drawing.Point(441, 366);
             this.capital_chart.Name = "capital_chart";
-            series26.ChartArea = "ChartArea1";
-            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series26.Name = "Series1";
-            this.capital_chart.Series.Add(series26);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "Series1";
+            this.capital_chart.Series.Add(series2);
             this.capital_chart.Size = new System.Drawing.Size(378, 265);
             this.capital_chart.TabIndex = 19;
             this.capital_chart.Text = "chart1";
             // 
             // personalcapital_chart
             // 
-            chartArea27.Name = "ChartArea1";
-            this.personalcapital_chart.ChartAreas.Add(chartArea27);
+            chartArea3.Name = "ChartArea1";
+            this.personalcapital_chart.ChartAreas.Add(chartArea3);
             this.personalcapital_chart.Location = new System.Drawing.Point(876, 53);
             this.personalcapital_chart.Name = "personalcapital_chart";
-            series27.ChartArea = "ChartArea1";
-            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series27.Name = "Series1";
-            this.personalcapital_chart.Series.Add(series27);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Name = "Series1";
+            this.personalcapital_chart.Series.Add(series3);
             this.personalcapital_chart.Size = new System.Drawing.Size(378, 265);
             this.personalcapital_chart.TabIndex = 20;
             this.personalcapital_chart.Text = "chart1";
@@ -290,14 +292,14 @@ namespace UIRS
             // 
             // earn_chart
             // 
-            chartArea28.Name = "ChartArea1";
-            this.earn_chart.ChartAreas.Add(chartArea28);
+            chartArea4.Name = "ChartArea1";
+            this.earn_chart.ChartAreas.Add(chartArea4);
             this.earn_chart.Location = new System.Drawing.Point(876, 366);
             this.earn_chart.Name = "earn_chart";
-            series28.ChartArea = "ChartArea1";
-            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series28.Name = "Series1";
-            this.earn_chart.Series.Add(series28);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Name = "Series1";
+            this.earn_chart.Series.Add(series4);
             this.earn_chart.Size = new System.Drawing.Size(378, 265);
             this.earn_chart.TabIndex = 24;
             this.earn_chart.Text = "chart1";
@@ -311,11 +313,29 @@ namespace UIRS
             this.label12.TabIndex = 25;
             this.label12.Text = "Добыча";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(31, 647);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(203, 17);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "% отчислений в лич. капитал";
+            // 
+            // personal_capital_textbox
+            // 
+            this.personal_capital_textbox.Location = new System.Drawing.Point(250, 647);
+            this.personal_capital_textbox.Name = "personal_capital_textbox";
+            this.personal_capital_textbox.Size = new System.Drawing.Size(149, 22);
+            this.personal_capital_textbox.TabIndex = 26;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1271, 761);
+            this.ClientSize = new System.Drawing.Size(1281, 779);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.personal_capital_textbox);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.earn_chart);
             this.Controls.Add(this.label11);
@@ -381,6 +401,8 @@ namespace UIRS
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataVisualization.Charting.Chart earn_chart;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox personal_capital_textbox;
     }
 }
 

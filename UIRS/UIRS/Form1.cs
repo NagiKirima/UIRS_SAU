@@ -73,6 +73,12 @@ namespace UIRS
                 fish_cost.Text = a.fish_cost.ToString();
                 init = false;
             }
+            try { a.personal_koef = double.Parse(personal_capital_textbox.Text); }
+            catch 
+            {
+                personal_capital_textbox.Text = a.personal_capital.ToString();
+                init = false;
+            }
             return init;
         }
         public MainWindow()

@@ -12,6 +12,7 @@ namespace UIRS
         // read prop
         public double fish_koeff { get; set; }
         public double invest_koeff { get; set; }
+        public double personal_koef { get; set; }
         public int ship_life { get; set; }
         public double ship_cost { get; set; }
         public double salary { get; set; }
@@ -22,10 +23,10 @@ namespace UIRS
         //calculate prop
         public double expenses { get; set; }
         public double income { get; set; }
-        public double capital { get; set; } = 1000;
-        public double personal_capital { get; set; } = 0;
+        public double capital { get; set; }
+        public double personal_capital { get; set; }
         public int personal { get; set; }
-        public double fish_stock { get; set; } = 1000;
+        public double fish_stock { get; set; }
         public double prod { get; set; }
         public double investition { get; set; }
 
@@ -33,6 +34,7 @@ namespace UIRS
         {
             fish_koeff = 1.05;
             invest_koeff = 0.1;
+            personal_koef = 0.1;
             ship_life = 20;
             ship_cost = 1000;
             salary = 10;
@@ -85,7 +87,7 @@ namespace UIRS
             var benefit = income - expenses;
             if (benefit > 0)
             {
-                var p_salary = benefit * (1 - invest_koeff);
+                var p_salary = benefit * personal_koef;
                 var investsum = benefit * invest_koeff;
                 personal_capital += p_salary;
                 investition += investsum;
