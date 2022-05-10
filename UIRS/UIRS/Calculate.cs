@@ -30,31 +30,71 @@ namespace UIRS
         public double prod { get; set; }
         public double investition { get; set; }
 
-        public Calculate() 
+        public Calculate()
         {
+            //koef
             fish_koeff = 1.05;
             invest_koeff = 0.1;
             personal_koef = 0.1;
+
+            //ship data
             ship_life = 20;
             ship_cost = 1000;
-            salary = 10;
             ship_command = 15;
             ship_earn = 20;
+            ships.Add(ship_life);
+
+            //salary
+            salary = 10;
+
+            //fish data
             fish_cost = 35;
+            fish_stock = 10000;
+
+            //capital data
             capital = 1000;
             personal_capital = 0;
-            fish_stock = 10000;
-            ships.Add(ship_life);
+        }
+        public void Init(double fish_koeff, double invest_koeff, double personal_koeff, int ship_life,
+            double ship_cost, int ship_command, double ship_earn, double salary, 
+            double fish_cost, double fish_stock, double capital, double personal_capital) 
+        {
+            //koef
+            this.fish_koeff = fish_koeff;
+            this.invest_koeff = invest_koeff;
+            this.personal_koef = personal_koef;
+
+            //ship data
+            this.ship_life = ship_life;
+            this.ship_cost = ship_cost;
+            this.ship_command = ship_command;
+            this.ship_earn = ship_earn;
+            this.ships.Clear();
+            this.ships.Add(ship_life);
+
+            //salary
+            this.salary = salary;
+
+            //fish data
+            this.fish_cost = fish_cost;
+            this.fish_stock = fish_stock;
+
+            //capital data
+            this.capital = capital;
+            this.personal_capital = personal_capital;
+
+            //reset values
+            prod = investition = expenses = income = personal = 0;
         }
         //calculate methods
         public void Iteration() 
         {
+            ShipsCalculate();
+            Amortization();
             FishStockCalculate();
             ExpensesCalculate();
             IncomeCalculate();
-            Amortization();
             CapitalCalculate();
-            ShipsCalculate();
         }
         
         private void IncomeCalculate() 
@@ -69,6 +109,7 @@ namespace UIRS
         private void FishStockCalculate() 
         {
             double eff = Math.Sqrt(fish_stock / 1000);
+            if (eff > 1) eff = 1;
             if (ships.Count * ship_earn * eff > fish_stock) prod = 0;
             else prod = ships.Count * ship_earn * eff;
             if (prod / fish_stock > 0.5) prod = 0;
@@ -78,7 +119,7 @@ namespace UIRS
         {
             for (var i = 0; i < ships.Count; i++)
             {
-                if (ships[i] > 0) ships[i]--;
+                if (ships[i] > 1) ships[i]--;
                 else ships.RemoveAt(i);
             }
         }

@@ -14,6 +14,57 @@ namespace UIRS
     {
         private Calculate simulation;
         private int iteration = 0;
+        public MainWindow()
+        {
+            InitializeComponent();
+            simulation = new Calculate();
+        }
+
+
+        // work with user
+        public void OutputData() 
+        {
+            var eps = 1000;
+            calculation_label.Text = $"Шаг - {iteration + 1}\n" +
+                $"Доход: {Math.Floor(simulation.income * eps) / eps}\n" +
+                $"Расход: {Math.Floor(simulation.expenses * eps) / eps}\n" +
+                $"Запас рыбы: {Math.Floor(simulation.fish_stock * eps) / eps}\n" +
+                $"Добыча: {Math.Floor(simulation.prod * eps) / eps}\n" +
+                $"Судна: {simulation.ships.Count}\n" +
+                $"Капитал: {Math.Floor(simulation.capital * eps) / eps}\n" +
+                $"Личный капитал: {Math.Floor(simulation.personal_capital * eps) / eps}\n" +
+                $"Персонал: {simulation.personal}\n" +
+                $"Инвестиционный вклад: {Math.Floor(simulation.investition * eps) / eps}";
+        }
+        private void BlockTextBoxes(bool block)
+        {
+            if (block)
+            {
+                fish_koeff.Enabled = false;
+                invest_koeff.Enabled = false;
+                ship_life.Enabled = false;
+                ship_cost.Enabled = false;
+                ship_command.Enabled = false;
+                ship_earn.Enabled = false;
+                fish_cost.Enabled = false;
+                salary.Enabled = false;
+                fish_cost.Enabled = false;
+                personal_capital_textbox.Enabled = false;
+            }
+            else
+            {
+                fish_koeff.Enabled = true;
+                invest_koeff.Enabled = true;
+                ship_life.Enabled = true;
+                ship_cost.Enabled = true;
+                ship_command.Enabled = true;
+                ship_earn.Enabled = true;
+                fish_cost.Enabled = true;
+                salary.Enabled = true;
+                fish_cost.Enabled = true;
+                personal_capital_textbox.Enabled = true;
+            }
+        }
         private bool ReadValues(Calculate a)
         {
             bool init = true;
@@ -76,16 +127,14 @@ namespace UIRS
             try { a.personal_koef = double.Parse(personal_capital_textbox.Text); }
             catch 
             {
-                personal_capital_textbox.Text = a.personal_capital.ToString();
+                personal_capital_textbox.Text = a.personal_koef.ToString();
                 init = false;
             }
             return init;
         }
-        public MainWindow()
-        {
-            InitializeComponent();
-            simulation = new Calculate();
-        }
+
+
+        // update chart data
         public void ChartIteration() 
         {
             fish_chart.Series[0].Points.AddXY(0, simulation.fish_stock);
@@ -94,23 +143,69 @@ namespace UIRS
             earn_chart.Series[0].Points.AddXY(0, simulation.prod);
             iteration++;
         }
+        private void ChartReset()
+        {
+            capital_chart.Series[0].Points.Clear();
+            earn_chart.Series[0].Points.Clear();
+            fish_chart.Series[0].Points.Clear();
+            personalcapital_chart.Series[0].Points.Clear();
+        }
+
+
+        // iteration click
         private void IterationButtonClick(object sender, EventArgs e)
         {
-            if (ReadValues(simulation))
+            if (Scenaries.SelectedIndex == 0)
+            {
+                if (ReadValues(simulation))
+                {
+                    simulation.Iteration();
+                    OutputData();
+                    ChartIteration();
+                }
+            }
+            else if(Scenaries.SelectedItem != null)
             {
                 simulation.Iteration();
-                var eps = 1000;
-                calculation_label.Text = $"Шаг - {iteration + 1}\n" +
-                    $"Доход: {Math.Floor(simulation.income*eps)/eps}\n" +
-                    $"Расход: {Math.Floor(simulation.expenses*eps)/eps}\n" +
-                    $"Запас рыбы: {Math.Floor(simulation.fish_stock*eps)/eps}\n" +
-                    $"Добыча: {Math.Floor(simulation.prod*eps)/eps}\n" +
-                    $"Судна: {simulation.ships.Count}\n" +
-                    $"Капитал: {Math.Floor(simulation.capital*eps)/eps}\n" +
-                    $"Личный капитал: {Math.Floor(simulation.personal_capital*eps)/eps}\n" +
-                    $"Персонал: {simulation.personal}\n" +
-                    $"Инвестиционный вклад: {Math.Floor(simulation.investition*eps)/eps}";
-                ChartIteration();  
+                OutputData();
+                ChartIteration();
+            }
+        }
+
+
+        //select scenaries
+        private void Scenaries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (Scenaries.SelectedIndex) 
+            {
+                case 0:
+                    {
+                        RegulatorRadioButton.Enabled = true;
+                        BlockTextBoxes(false);
+                        break;
+                    }
+                case 1:
+                    {
+                        RegulatorRadioButton.Checked = false;
+                        RegulatorRadioButton.Enabled = false;
+                        ChartReset();
+                        simulation.Init(1, 0.1, 0.1, 20, 1000, 15, 100, 10, 5, 1000, 5000, 0);
+                        ReadValues(simulation);
+                        OutputData();
+                        BlockTextBoxes(true);
+                        break;
+                    }
+                case 2:
+                    {
+                        RegulatorRadioButton.Checked = false;
+                        RegulatorRadioButton.Enabled = false;
+                        ChartReset();
+                        simulation.Init(1.022, 0.5, 0.1, 20, 1000, 30, 100, 10, 5, 100000, 5000, 0);
+                        ReadValues(simulation);
+                        OutputData();
+                        BlockTextBoxes(true);
+                        break;
+                    }
             }
         }
     }

@@ -8,3 +8,13 @@ C:\Users\Nik\OneDrive\Документы\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIR
 C:\Users\Nik\OneDrive\Документы\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.exe
 C:\Users\Nik\OneDrive\Документы\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.pdb
 C:\Users\Nik\OneDrive\Документы\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.MainWindow.resources
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\bin\Debug\UIRS.exe.config
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\bin\Debug\UIRS.exe
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\bin\Debug\UIRS.pdb
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.csprojAssemblyReference.cache
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.MainWindow.resources
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.Properties.Resources.resources
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.csproj.GenerateResource.cache
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.csproj.CoreCompileInputs.cache
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.exe
+C:\Users\XEON4Ik\Documents\GitHub\UIRS_SAU\UIRS\UIRS\obj\Debug\UIRS.pdb
