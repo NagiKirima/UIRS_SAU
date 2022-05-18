@@ -194,6 +194,7 @@ namespace UIRS
         //select scenaries
         private void Scenaries_SelectedIndexChanged(object sender, EventArgs e)
         {
+            iteration = 0;
             switch (Scenaries.SelectedIndex)
             {
                 case 0:

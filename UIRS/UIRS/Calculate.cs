@@ -118,7 +118,7 @@ namespace UIRS
             if (fish_stock > prev_fish_stock)
             {
                 kprod = 1;
-                if (capital / ship_cost < 2 && capital - expenses < 0)
+                if (capital / ship_cost < 2.5 && capital - expenses < 0)
                 {
                     invest_koeff = 0;
                     personal_koef = 0.1;
