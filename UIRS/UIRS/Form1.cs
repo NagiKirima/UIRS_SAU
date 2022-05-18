@@ -22,7 +22,7 @@ namespace UIRS
 
 
         // work with user
-        public void OutputData() 
+        public void OutputData()
         {
             var eps = 1000;
             calculation_label.Text = $"Шаг - {iteration + 1}\n" +
@@ -78,14 +78,14 @@ namespace UIRS
             try { a.invest_koeff = double.Parse(invest_koeff.Text); }
             catch
             {
-               // a.invest_koeff = 0.1;
+                // a.invest_koeff = 0.1;
                 invest_koeff.Text = a.invest_koeff.ToString();
                 init = false;
             }
             try { a.salary = double.Parse(salary.Text); }
             catch
             {
-               // a.salary = 10;
+                // a.salary = 10;
                 salary.Text = a.salary.ToString();
                 init = false;
             }
@@ -99,7 +99,7 @@ namespace UIRS
             try { a.ship_cost = double.Parse(ship_cost.Text); }
             catch
             {
-               // a.ship_cost = 1500;
+                // a.ship_cost = 1500;
                 ship_cost.Text = a.ship_cost.ToString();
                 init = false;
             }
@@ -120,33 +120,33 @@ namespace UIRS
             try { a.fish_cost = double.Parse(fish_cost.Text); }
             catch
             {
-               // a.fish_cost = 35;
+                // a.fish_cost = 35;
                 fish_cost.Text = a.fish_cost.ToString();
                 init = false;
             }
             try { a.personal_koef = double.Parse(personal_capital_textbox.Text); }
-            catch 
+            catch
             {
                 personal_capital_textbox.Text = a.personal_koef.ToString();
                 init = false;
             }
             return init;
         }
-        private void WriteValues(Calculate a) 
+        private void WriteValues(Calculate a)
         {
             fish_koeff.Text = a.fish_koeff.ToString();
-            invest_koeff.Text = a.invest_koeff.ToString(); 
-            salary.Text = a.salary.ToString();  
+            invest_koeff.Text = a.invest_koeff.ToString();
+            salary.Text = a.salary.ToString();
             ship_command.Text = a.ship_command.ToString();
-            ship_cost.Text = a.ship_cost.ToString(); 
+            ship_cost.Text = a.ship_cost.ToString();
             ship_earn.Text = a.ship_earn.ToString();
-            ship_life.Text = a.ship_life.ToString(); 
+            ship_life.Text = a.ship_life.ToString();
             fish_cost.Text = a.fish_cost.ToString();
             personal_capital_textbox.Text = a.personal_koef.ToString();
         }
 
         // update chart data
-        public void ChartIteration() 
+        public void ChartIteration()
         {
             fish_chart.Series[0].Points.AddXY(0, simulation.fish_stock);
             capital_chart.Series[0].Points.AddXY(0, simulation.capital);
@@ -166,9 +166,10 @@ namespace UIRS
         // iteration click
         private void IterationButtonClick(object sender, EventArgs e)
         {
-            if (Scenaries.SelectedIndex == 3) 
+            if (Scenaries.SelectedIndex == 3)
             {
-                simulation.P_Iteration();
+                simulation.Iteration(true);
+                WriteValues(simulation);
                 OutputData();
                 ChartIteration();
             }
@@ -193,7 +194,7 @@ namespace UIRS
         //select scenaries
         private void Scenaries_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (Scenaries.SelectedIndex) 
+            switch (Scenaries.SelectedIndex)
             {
                 case 0:
                     {
@@ -221,10 +222,10 @@ namespace UIRS
                         BlockTextBoxes(true);
                         break;
                     }
-                case 3: 
+                case 3:
                     {
                         ChartReset();
-                        simulation.Init(1.1, 0.2, 0.1, 20, 800, 12, 100, 10, 5, 1000, 5000, 1000);
+                        simulation.Init(1.1, 0.1, 0.1, 30, 800, 15, 15, 1, 15, 500, 1000, 0);
                         WriteValues(simulation);
                         OutputData();
                         BlockTextBoxes(true);

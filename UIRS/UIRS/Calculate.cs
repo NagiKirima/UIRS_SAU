@@ -27,8 +27,12 @@ namespace UIRS
         public double personal_capital { get; set; }
         public int personal { get; set; }
         public double fish_stock { get; set; }
+        private double prev_fish_stock { get; set; }
         public double prod { get; set; }
+        private double kprod { get; set; } = 1;
         public double investition { get; set; }
+
+        // initialize
         public Calculate()
         {
             //koef
@@ -40,7 +44,7 @@ namespace UIRS
             ship_life = 20;
             ship_cost = 800;
             ship_command = 15;
-            ship_earn = 20;
+            ship_earn = 30;
             ships.Add(ship_life);
 
             //salary
@@ -55,8 +59,8 @@ namespace UIRS
             personal_capital = 0;
         }
         public void Init(double fish_koeff, double invest_koeff, double personal_koeff, int ship_life,
-            double ship_cost, int ship_command, double ship_earn, double salary, 
-            double fish_cost, double fish_stock, double capital, double personal_capital) 
+            double ship_cost, int ship_command, double ship_earn, double salary,
+            double fish_cost, double fish_stock, double capital, double personal_capital)
         {
             //koef
             this.fish_koeff = fish_koeff;
@@ -85,8 +89,10 @@ namespace UIRS
             //reset values
             prod = investition = expenses = income = personal = 0;
         }
+
+
         //calculate methods
-        public void Iteration() 
+        public void Iteration()
         {
             ShipsCalculate();
             Amortization();
@@ -95,26 +101,69 @@ namespace UIRS
             IncomeCalculate();
             CapitalCalculate();
         }
-        
-        private void IncomeCalculate() 
+
+
+        //regulation
+        public void Iteration(bool a)
+        {
+            FishStockCalculate();
+            ExpensesCalculate();
+            IncomeCalculate();
+            CapitalCalculate();
+            Amortization();
+            Regulation();
+        }
+        private void Regulation()
+        {
+            if (fish_stock > prev_fish_stock)
+            {
+                kprod = 1;
+                if (capital / ship_cost < 2 && capital - expenses < 0)
+                {
+                    invest_koeff = 0;
+                    personal_koef = 0.1;
+                }
+                else
+                {
+                    invest_koeff = 0.7;
+                    personal_koef = 0.15;
+                    ShipsCalculate();
+                }
+            }
+            else
+            {
+                invest_koeff = 0;
+                personal_koef = 0.2;
+                kprod = Math.Abs(fish_stock - prev_fish_stock) / fish_stock;
+            }
+        }
+
+        private void IncomeCalculate()
         {
             income = prod * fish_cost;
         }
-        private void ExpensesCalculate() 
+        private void ExpensesCalculate()
         {
             personal = ship_command * ships.Count;
             expenses = personal * salary + ship_cost / ship_life * ships.Count;
         }
-        private void FishStockCalculate() 
+        private double GetEff()
         {
-            double eff = Math.Sqrt(fish_stock / 1000);
-            if (eff > 1) eff = 1;
+            if (fish_stock > 1000)
+                return 1;
+            else
+                return Math.Sqrt(fish_stock / 1000.0);
+        }
+        private void FishStockCalculate()
+        {
+            prev_fish_stock = fish_stock;
+            double eff = GetEff();
             if (ships.Count * ship_earn * eff > fish_stock) prod = 0;
             else prod = ships.Count * ship_earn * eff;
             if (prod / fish_stock > 0.5) prod = 0;
             fish_stock = fish_stock * fish_koeff - prod;
         }
-        private void Amortization() 
+        private void Amortization()
         {
             for (var i = 0; i < ships.Count; i++)
             {
@@ -122,7 +171,7 @@ namespace UIRS
                 else ships.RemoveAt(i);
             }
         }
-        private void CapitalCalculate() 
+        private void CapitalCalculate()
         {
             var benefit = income - expenses;
             if (benefit > 0)
@@ -135,19 +184,13 @@ namespace UIRS
             }
             else capital += benefit;
         }
-        private void ShipsCalculate()   
+        private void ShipsCalculate()
         {
             if (investition > ship_cost)
             {
                 ships.Add(ship_life);
                 investition -= ship_cost;
             }
-        }
-
-        public void P_Iteration() 
-        {
-            var delta = fish_stock * (Math.Abs(1 - fish_koeff));
-
         }
     }
 }
