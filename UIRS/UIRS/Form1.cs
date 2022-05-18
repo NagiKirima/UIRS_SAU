@@ -132,7 +132,18 @@ namespace UIRS
             }
             return init;
         }
-
+        private void WriteValues(Calculate a) 
+        {
+            fish_koeff.Text = a.fish_koeff.ToString();
+            invest_koeff.Text = a.invest_koeff.ToString(); 
+            salary.Text = a.salary.ToString();  
+            ship_command.Text = a.ship_command.ToString();
+            ship_cost.Text = a.ship_cost.ToString(); 
+            ship_earn.Text = a.ship_earn.ToString();
+            ship_life.Text = a.ship_life.ToString(); 
+            fish_cost.Text = a.fish_cost.ToString();
+            personal_capital_textbox.Text = a.personal_koef.ToString();
+        }
 
         // update chart data
         public void ChartIteration() 
@@ -155,7 +166,13 @@ namespace UIRS
         // iteration click
         private void IterationButtonClick(object sender, EventArgs e)
         {
-            if (Scenaries.SelectedIndex == 0)
+            if (Scenaries.SelectedIndex == 3) 
+            {
+                simulation.P_Iteration();
+                OutputData();
+                ChartIteration();
+            }
+            else if (Scenaries.SelectedIndex == 0)
             {
                 if (ReadValues(simulation))
                 {
@@ -164,7 +181,7 @@ namespace UIRS
                     ChartIteration();
                 }
             }
-            else if(Scenaries.SelectedItem != null)
+            else if (Scenaries.SelectedItem != null)
             {
                 simulation.Iteration();
                 OutputData();
@@ -180,28 +197,35 @@ namespace UIRS
             {
                 case 0:
                     {
-                        RegulatorRadioButton.Enabled = true;
+                        ChartReset();
+                        simulation = new Calculate();
+                        WriteValues(simulation);
                         BlockTextBoxes(false);
                         break;
                     }
                 case 1:
                     {
-                        RegulatorRadioButton.Checked = false;
-                        RegulatorRadioButton.Enabled = false;
                         ChartReset();
                         simulation.Init(1, 0.1, 0.1, 20, 1000, 15, 100, 10, 5, 1000, 5000, 0);
-                        ReadValues(simulation);
+                        WriteValues(simulation);
                         OutputData();
                         BlockTextBoxes(true);
                         break;
                     }
                 case 2:
                     {
-                        RegulatorRadioButton.Checked = false;
-                        RegulatorRadioButton.Enabled = false;
                         ChartReset();
-                        simulation.Init(1.022, 0.5, 0.1, 20, 1000, 30, 100, 10, 5, 100000, 5000, 0);
-                        ReadValues(simulation);
+                        simulation.Init(1.05, 0.5, 0.1, 30, 1000, 12, 300, 10, 5, 100000, 5000, 0);
+                        WriteValues(simulation);
+                        OutputData();
+                        BlockTextBoxes(true);
+                        break;
+                    }
+                case 3: 
+                    {
+                        ChartReset();
+                        simulation.Init(1.1, 0.2, 0.1, 20, 800, 12, 100, 10, 5, 1000, 5000, 1000);
+                        WriteValues(simulation);
                         OutputData();
                         BlockTextBoxes(true);
                         break;

@@ -29,7 +29,6 @@ namespace UIRS
         public double fish_stock { get; set; }
         public double prod { get; set; }
         public double investition { get; set; }
-
         public Calculate()
         {
             //koef
@@ -39,7 +38,7 @@ namespace UIRS
 
             //ship data
             ship_life = 20;
-            ship_cost = 1000;
+            ship_cost = 800;
             ship_command = 15;
             ship_earn = 20;
             ships.Add(ship_life);
@@ -143,6 +142,12 @@ namespace UIRS
                 ships.Add(ship_life);
                 investition -= ship_cost;
             }
+        }
+
+        public void P_Iteration() 
+        {
+            var delta = fish_stock * (Math.Abs(1 - fish_koeff));
+
         }
     }
 }
